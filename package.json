@@ -1,0 +1,14 @@
+{
+  "name": "demo_applicatie",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "author": "Kenneth Verstoep",
+  "license": "ISC"
+}

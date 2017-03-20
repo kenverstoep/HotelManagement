@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="HotelManagement" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hotel Management</title>
+
+    <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kenneth Verstoep">
+    <meta name="description" content="A program to manage hotels.">
+
+</head>
+
+<body>
+<div class="container">
+    <!--Header-->
+    <div class="row form-group">
+        <div class="col-xs-12">
+            <div class="btn-group btn-group-lg btn-group-justified" role="group">
+                <a href='#' class="btn btn-info">Klanten</a>
+                <a class="btn btn-info">Medewerkers</a>
+                <a href='#/hotel' class="btn btn-info">Hotels</a>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!--Main-->
+    <div class="row">
+        <section ng-view></section>
+    </div>
+
+    <!--Footer-->
+    <div class="navbar navbar-fixed-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3 text-left">
+                    Kenneth Verstoep
+                </div>
+                <div class="col-xs-6 text-center">
+                    INF-H Single Page Application
+                </div>
+                <div class="col-xs-3 text-right">
+                    13122789
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Scripts-->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="scripts/bootstrap.min.js"></script>
+<script src="scripts/angular.min.js"></script>
+<script src="scripts/angular-route.min.js"></script>
+
+<script src="scripts/Customer.controller.js"></script>
+<script src="scripts/Hotel.controller.js"></script>
+
+<script src="scripts/routeService.js"></script>
+
+
+</body>

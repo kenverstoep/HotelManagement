@@ -1,0 +1,67 @@
+<!--Customer Template-->
+
+{{ message }}
+
+<div id="Customer">
+    <div class="col-xs-6">
+        <div class="list-group">
+            <button type="button" ng-repeat="customer in customers" class="list-group-item " ng-click = "selectCustomer(customer)">
+                {{customer.firstname}} {{customer.lastname}}
+            </button>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <form ng-submit="updateCustomer()" class="form-group">
+            <label for="FirstNameCustomer">Voornaam:</label>
+            <input type="text" class="form-control" ng-model="tempCustomer.firstname" id="FirstNameCustomer">
+            <br>
+            <label for="LastNameCustomer">Achternaam:</label>
+            <input type="text" class="form-control" ng-model="tempCustomer.lastname" id="LastNameCustomer">
+            <br>
+
+
+            <button type="submit" class="btn btn-info">Opslaan</button>
+        </form>
+
+        <button style="width: 79px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Nieuw</button>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Nieuwe klant</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="newCustomerForm" ng-submit="addCustomer()" class="form-group">
+                    <label for="FirstNameNewCustomer">Voornaam:</label>
+                    <input type="text" class="form-control" ng-model="tempCustomer.firstname" id="FirstNameNewCustomer">
+                    <br>
+                    <label for="LastNameNewCustomer">Achternaam:</label>
+                    <input type="text" class="form-control" ng-model="tempCustomer.lastname" id="LastNameNewCustomer">
+                    <br>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Opslaan</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $('#newCustomerForm').submit(function() {
+        $('#myModal').modal('hide');
+        var form = document.getElementById("newCustomerForm");
+        form.reset();
+    });
+</script>

@@ -1,0 +1,27 @@
+<!--Hotel Template-->
+<div id="Hotels">
+    <div class="col-xs-6">
+        <div class="list-group">
+            <button type="button" ng-repeat="hotel in hotels" class="list-group-item">
+                {{hotel.name}}
+            </button>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="form-group">
+            <label for="Name">Naam:</label>
+            <input type="text" class="form-control" id="Name">
+            <br>
+            <label for="City">Plaats:</label>
+            <input type="text" class="form-control" id="City">
+            <br>
+            <label for="Address">Adres:</label>
+            <input type="text" class="form-control" id="Address">
+            <br>
+            <label for="Zipcode">Postcode:</label>
+            <input type="text" class="form-control" id="Zipcode">
+            <br>
+            <button type="submit" class="btn btn-info">Opslaan</button>
+        </div>
+    </div>
+</div>
