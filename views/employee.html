@@ -1,0 +1,109 @@
+<div id="employees">
+    <div class="col-xs-6">
+        <div class="list-group">
+            <label for="clickedHotelSel">Hotel Filter:</label>
+            <select id="clickedHotelSel" class="form-control" ng-model="selectedHotel">
+                <option value="">Toon alle</option>
+                <option ng-repeat="hotel in hotels" value="{{hotel.id}}">{{hotel.name}}</option>
+            </select>
+            <br>
+            <div style="overflow: auto; max-height: 59vh;"> <!--TODO refactor to css class-->
+                <button type="button" ng-repeat="employee in employees | filter:{hotel:selectedHotel}"
+                        class="list-group-item" ng-click="selectEmployee(employee)"
+                        track by $index>
+                    {{employee.firstname}} {{employee.lastname}}
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <form ng-submit="updateEmployee()" class="form-group">
+            <label for="FirstNameEmployee">Voornaam:</label>
+            <input type="text" class="form-control" id="FirstNameEmployee" ng-model="tempEmployee.firstname">
+            <br>
+            <label for="LastNameEmployee">Achternaam:</label>
+            <input type="text" class="form-control" id="LastNameEmployee" ng-model="tempEmployee.lastname">
+            <br>
+            <label for="DateOfBirthEmployee">Geboortedatum:</label>
+            <input type="text" class="form-control" id="DateOfBirthEmployee" ng-model="tempEmployee.dateofbirth">
+            <br>
+            <label for="selhotel">Werkend bij:</label>
+            <select class="form-control" id="selhotel" ng-model="tempEmployee.hotel">
+                <option ng-repeat="hotel in hotels" value="{{hotel.id}}">{{hotel.name}}</option>
+            </select>
+            <br>
+            <label for="sel2">Leidinggevende:</label>
+            <select class="form-control" id="sel2" ng-model="tempEmployee.leader">
+                <option ng-repeat="leader in leaders | filter:{hotel:tempEmployee.hotel}" value="{{leader.id}}">
+                    {{leader.firstname}} {{leader.lastname}}
+                </option>
+            </select>
+            <br>
+            <label>Leidinggevend?
+                <input type="checkbox" ng-model="tempEmployee.leaderboolean">
+            </label>
+            <br/>
+            <div class="btn-group-lg">
+                <button type="submit" class="btn btn-info">Opslaan</button>
+                <button class="btn btn-danger" ng-click="resetFields()">reset</button>
+            </div>
+        </form>
+        <button style="width: 79px;" class="btn btn-primary" data-toggle="modal" data-target="#newEmployeeModal">Nieuw
+        </button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="EmployeeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="EmployeeModalLabel">Nieuwe medewerker</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="newEmployeeForm" ng-submit="addEmployee()" class="form-group" name="newEmployeeForm" novalidate>
+                    <label for="FirstNameNewEmployee">Voornaam:</label>
+                    <input type="text" class="form-control" ng-model="newEmployee.firstname" id="FirstNameNewEmployee">
+                    <br>
+                    <label for="LastNameNewEmployee">Achternaam:</label>
+                    <input type="text" class="form-control" ng-model="newEmployee.lastname" id="LastNameNewEmployee">
+                    <br>
+                    <label for="NewEmployeeDateOfBirth">Geboortedatum:</label>
+                    <input type="text" class="form-control" ng-model="newEmployee.dateofbirth"
+                           id="NewEmployeeDateOfBirth">
+                    <br>
+                    <label for="selhotel2">Werkend bij:</label>
+                    <select class="form-control" id="selhotel2" ng-model="newEmployee.hotel" name="hotel_id" required>
+                        <option ng-repeat="hotel in hotels" value="{{hotel.id}}">{{hotel.name}}</option>
+                    </select>
+                    <div ng-show="newEmployeeForm.hotel_id.$invalid" class="alert alert-danger">Selecteer een hotel.</div>
+
+
+                    <br>
+                    <label for="sel3">Leidinggevende:</label>
+                    <select ng-disabled="newEmployeeForm.hotel_id.$invalid" class="form-control" id="sel3" ng-model="newEmployee.leader">
+                        <option ng-repeat="leader in leaders | filter:{hotel:newEmployee.hotel}" value="{{leader.id}}">
+                            {{leader.firstname}} {{leader.lastname}}
+                        </option>
+                    </select>
+                    <br>
+                    <label>Leidinggevend?
+                        <input type="checkbox" ng-model="newEmployee.leaderboolean">
+                    </label>
+                    <br/>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" ng-disabled="newEmployeeForm.$invalid" class="btn btn-primary">Opslaan</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

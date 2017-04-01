@@ -1,7 +1,7 @@
 /**
  * Created by Kenneth on 10-3-2017.
  */
-var hotelManagementModule = angular.module('HotelManagement',['ngRoute', 'customerController', 'hotelController']);
+var hotelManagementModule = angular.module('HotelManagement',['ngRoute']);
 hotelManagementModule.config(function ($routeProvider, $locationProvider){
     $routeProvider
         .when('/', {
@@ -12,6 +12,11 @@ hotelManagementModule.config(function ($routeProvider, $locationProvider){
         .when('/hotel', {
             templateUrl: 'views/hotel.html',
             controller: 'HotelController'
+        })
+
+        .when('/employee', {
+            templateUrl: 'views/employee.html',
+            controller: 'EmployeeController'
         });
 
     $locationProvider.hashPrefix('');

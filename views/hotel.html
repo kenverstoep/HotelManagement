@@ -2,26 +2,79 @@
 <div id="Hotels">
     <div class="col-xs-6">
         <div class="list-group">
-            <button type="button" ng-repeat="hotel in hotels" class="list-group-item">
+            <button type="button" ng-repeat="hotel in hotels" class="list-group-item" ng-click="selectHotel(hotel)"
+                    track by $index>
                 {{hotel.name}}
             </button>
         </div>
     </div>
     <div class="col-xs-6">
-        <div class="form-group">
+        <form ng-submit="updateHotel()" class="form-group">
             <label for="Name">Naam:</label>
-            <input type="text" class="form-control" id="Name">
+            <input type="text" class="form-control" id="Name" ng-model="tempHotel.name">
             <br>
             <label for="City">Plaats:</label>
-            <input type="text" class="form-control" id="City">
+            <input type="text" class="form-control" id="City" ng-model="tempHotel.city">
             <br>
             <label for="Address">Adres:</label>
-            <input type="text" class="form-control" id="Address">
+            <input type="text" class="form-control" id="Address" ng-model="tempHotel.address">
             <br>
             <label for="Zipcode">Postcode:</label>
-            <input type="text" class="form-control" id="Zipcode">
+            <input type="text" class="form-control" id="Zipcode" ng-model="tempHotel.zipcode">
             <br>
+            <div class="btn-group-lg">
             <button type="submit" class="btn btn-info">Opslaan</button>
+            <button class="btn btn-danger" ng-click="resetFields()">reset</button>
+            </div>
+        </form>
+        <button style="width: 79px;" class="btn btn-primary" data-toggle="modal" data-target="#newHotelModal">Nieuw
+        </button>
+    </div>
+
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newHotelModal" tabindex="-1" role="dialog" aria-labelledby="HotelModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="HotelModalLabel">Nieuw hotel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="newHotelForm" ng-submit="addHotel()" class="form-group">
+                    <label for="NameNewHotel">Naam:</label>
+                    <input type="text" class="form-control" ng-model="newHotel.name" id="NameNewHotel">
+                    <br>
+                    <label for="CityNewHotel">Plaats:</label>
+                    <input type="text" class="form-control" ng-model="newHotel.city" id="CityNewHotel">
+                    <br>
+                    <label for="AddressNewHotel">Adres:</label>
+                    <input type="text" class="form-control" ng-model="newHotel.address" id="AddressNewHotel">
+                    <br>
+                    <label for="ZipcodeNewHotel">Postcode:</label>
+                    <input type="text" class="form-control" ng-model="newHotel.zipcode" id="ZipcodeNewHotel">
+                    <br>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Opslaan</button>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
+
+<script>
+    $('#newHotelForm').submit(function () {
+        $('#newHotelModal').modal('hide');
+        var form = document.getElementById("newHotelForm");
+        form.reset();
+    });
+</script>

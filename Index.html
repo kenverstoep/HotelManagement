@@ -20,7 +20,7 @@
         <div class="col-xs-12">
             <div class="btn-group btn-group-lg btn-group-justified" role="group">
                 <a href='#' class="btn btn-info">Klanten</a>
-                <a class="btn btn-info">Medewerkers</a>
+                <a href='#/employee' class="btn btn-info">Medewerkers</a>
                 <a href='#/hotel' class="btn btn-info">Hotels</a>
             </div>
         </div>
@@ -28,7 +28,7 @@
     <br>
 
     <!--Main-->
-    <div class="row">
+    <div class="row" style="overflow: auto; max-height: 70vh;">
         <section ng-view></section>
     </div>
 
@@ -53,16 +53,16 @@
 
 <!--Scripts-->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="scripts/jquery-3.2.0.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="scripts/bootstrap.min.js"></script>
-<script src="scripts/angular.min.js"></script>
+<script src="scripts/angular.js"></script>
 <script src="scripts/angular-route.min.js"></script>
+<script src="scripts/services/routeService.js"></script>
+<script src="scripts/services/hotelStorage.service.js"></script>
 
-<script src="scripts/Customer.controller.js"></script>
-<script src="scripts/Hotel.controller.js"></script>
-
-<script src="scripts/routeService.js"></script>
-
+<script src="scripts/controllers/customer.controller.js"></script>
+<script src="scripts/controllers/hotel.controller.js"></script>
+<script src="scripts/controllers/employee.controller.js"></script>
 
 </body>

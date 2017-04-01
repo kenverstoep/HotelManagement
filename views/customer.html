@@ -1,29 +1,44 @@
 <!--Customer Template-->
-
-{{ message }}
-
 <div id="Customer">
     <div class="col-xs-6">
+        <input class="form-control" ng-model="searchText" placeholder="Zoeken">
+        <br>
         <div class="list-group">
-            <button type="button" ng-repeat="customer in customers" class="list-group-item " ng-click = "selectCustomer(customer)">
+            <button type="button" ng-repeat="customer in customers | filter:searchText" class="list-group-item "
+                    ng-click="selectCustomer(customer)" track by $index>
                 {{customer.firstname}} {{customer.lastname}}
             </button>
         </div>
     </div>
     <div class="col-xs-6">
-        <form ng-submit="updateCustomer()" class="form-group">
+        <form ng-submit="updateCustomer()" class="form-group" name="editCustomerForm" novalidate>
             <label for="FirstNameCustomer">Voornaam:</label>
-            <input type="text" class="form-control" ng-model="tempCustomer.firstname" id="FirstNameCustomer">
+            <input type="text" name="firstNameTempCustomer" class="form-control" ng-model="tempCustomer.firstname" id="FirstNameCustomer" required>
+            <div ng-show="editCustomerForm.firstNameTempCustomer.$invalid && !editCustomerForm.firstNameTempCustomer.$pristine" class="alert alert-danger">Voornaam moet ingevuld zijn.</div>
+
             <br>
             <label for="LastNameCustomer">Achternaam:</label>
             <input type="text" class="form-control" ng-model="tempCustomer.lastname" id="LastNameCustomer">
             <br>
-
-
-            <button type="submit" class="btn btn-info">Opslaan</button>
+            <label for="sel0">Hotel</label>
+            <select class="form-control" id="sel0" ng-model="tempCustomer.hotel">
+                <option ng-repeat="hotel in hotels" value="{{hotel.id}}">{{hotel.name}}</option>
+            </select>
+            <br>
+            <label for="Room">Kamernummer:</label>
+            <input type="text" class="form-control" ng-model="tempCustomer.room" id="Room">
+            <br>
+            <label for="Date">Datum:</label>
+            <input type="text" class="form-control" ng-model="tempCustomer.date" id="Date">
+            <br>
+            <div class="btn-group-lg">
+            <button type="submit" class="btn btn-info" ng-disabled="editCustomerForm.$invalid">Opslaan</button>
+            <button class="btn btn-danger" ng-click="resetFields()" id="resetButton">reset</button>
+            </div>
         </form>
-
-        <button style="width: 79px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >Nieuw</button>
+        <br>
+        <button style="width: 79px;" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Nieuw</button>
+        <button class="btn btn-danger" ng-click="deleteCustomer()">Verwijder Klant</button>
 
     </div>
 </div>
@@ -41,10 +56,21 @@
             <div class="modal-body">
                 <form id="newCustomerForm" ng-submit="addCustomer()" class="form-group">
                     <label for="FirstNameNewCustomer">Voornaam:</label>
-                    <input type="text" class="form-control" ng-model="tempCustomer.firstname" id="FirstNameNewCustomer">
+                    <input type="text" class="form-control" ng-model="newCustomer.firstname" id="FirstNameNewCustomer">
                     <br>
                     <label for="LastNameNewCustomer">Achternaam:</label>
-                    <input type="text" class="form-control" ng-model="tempCustomer.lastname" id="LastNameNewCustomer">
+                    <input type="text" class="form-control" ng-model="newCustomer.lastname" id="LastNameNewCustomer">
+                    <br>
+                    <label for="sel1">Select hotel:</label>
+                    <select class="form-control" id="sel1" ng-model="newCustomer.hotel">
+                        <option ng-repeat="hotel in hotels" value="{{hotel.id}}">{{hotel.name}}</option>
+                    </select>
+                    <br>
+                    <label for="NewCustomerRoom">Kamernummer:</label>
+                    <input type="text" class="form-control" ng-model="newCustomer.room" id="NewCustomerRoom">
+                    <br>
+                    <label for="NewCustomerDate">Datum:</label>
+                    <input type="text" class="form-control" ng-model="newCustomer.date" id="NewCustomerDate">
                     <br>
 
                     <div class="modal-footer">
@@ -59,7 +85,7 @@
 </div>
 
 <script>
-    $('#newCustomerForm').submit(function() {
+    $('#newCustomerForm').submit(function () {
         $('#myModal').modal('hide');
         var form = document.getElementById("newCustomerForm");
         form.reset();
